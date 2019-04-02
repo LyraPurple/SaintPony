@@ -1,18 +1,25 @@
 <?php
 
-/*  
-******************************** 
-On retourne au début du document*/
+
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
-/* 
-Pour ajoutay notre namespace et notre use  
-********************************
+/* Ajouter une route en un seul fichier 
+(Méthode aussi efficace que yaml, 
+il y en a pour tout les goûts.) 
+Installer 
+*******************************
+composer require annotations
+*******************************
 */
+use Symfony\Component\Routing\Annotation\Route;
+
 
 // On va créer une route.
 class WelcomeController
 {
+    /**
+     * @Route("/babou", name="babou")
+     */
     public function babou(){
         $name = 'Boubi';
         // Ce sera une route, et chaque route (chaque page) 
@@ -23,11 +30,3 @@ class WelcomeController
         new Response('<html><body>La rouroute '.$name.'</body></html>');
     }
 }
-
-/* Enfin: /Symfony_by_me/discover-symfony/config/routes.yaml
-plop:
-  path: /babou
-  controller: App\Controller\WelcomeController::babou
-      # Allez voire: http://localhost:8000/babou */
-
-//  🚨 Méthode Yaml🚨
