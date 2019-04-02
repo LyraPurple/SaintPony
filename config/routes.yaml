@@ -1,3 +1,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+plop:
+  path: /babou
+  controller: App\Controller\WelcomeController::babou
+      # Allez voire: http://localhost:8000/babou
+# Définition de le contenu de la page (de la route)
+# /Symfony_by_me/discover-symfony/src/Controller/WelcomeController.php
+# Méthode Yaml
