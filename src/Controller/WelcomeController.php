@@ -1,6 +1,6 @@
 <?php
 
-
+// http://127.0.0.1:8000/babou
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 /* Ajouter une route en un seul fichier 
@@ -22,6 +22,8 @@ class WelcomeController
      */
     public function babou(){
         $name = 'Boubi';
+        // On peut dumper une variable comme var_dump
+        dump($name);
         // Ce sera une route, et chaque route (chaque page) 
         // doit renvoyer quelque chose. RETURN
         return
