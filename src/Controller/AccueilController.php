@@ -2,6 +2,7 @@
 
 // http://127.0.0.1:8000/babou/*
 namespace App\Controller;
+use Psr\Log\LoggerInterface; /* Pour utiliser loggerInterface */
 use Symfony\Component\HttpFoundation\Request;/* Pour récupérer la requête $_GET et $_POST en Symfony */
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class AccueilController extends AbstractController /* Pour hériter de "toutes l
     /**
     * @Route("/", name="naccueil")
     */
-    public function naccueil(Request $potiteRequete) /* Il n'y a plus de $_GET et $_POST en Symfony */
+    public function naccueil(Request $potiteRequete, loggerInterface $loggation) /* Il n'y a plus de $_GET et $_POST en Symfony */
     {
         dump($potiteRequete); /* équivalant à $_GET['parametre-toto']  ou $_POST['parametre-toto']*/
         // F12 > query > parametres
@@ -26,6 +27,11 @@ class AccueilController extends AbstractController /* Pour hériter de "toutes l
 
         // Méthode de la requête
         dump($potiteRequete->isMethod('POST'));
+
+        // Ecrire un log /discover-symfony/var/log/dev.log
+        $loggation->info('L\'utilisateur a supprimé un produit', ['produit'=> 2]);
+        // Commande terminale pour: php bin/console debug:autowiring
+        
 
         return $this->render('accueil/naccueil.html.twig');
     }
