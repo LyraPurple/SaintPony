@@ -1,6 +1,6 @@
 <?php
 
-// http://127.0.0.1:8000/babou/Boubou
+// http://127.0.0.1:8000/babou/*
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; /* Ajouter ce 
 class WelcomeController extends AbstractController /* Pour hériter de "toutes les méthodes de extends AbstractController" */
 {
     /**
-     * @Route("/babou/{nomRoute}", name="babou")
+     * @Route("/babou/{nomRoute}", name="babou", requirements={"^[a-z]{3,8}$"})
      */
-    public function babou($nomRoute){  
+    // Symfony de base fait: ^$ 
+    // donc {"^[a-z]{3,8}$"} = {"[a-z]{3,8}"}
+    // Dans nos Regex https://regex101.com/
+
+    public function babou($nomRoute = 'Boubou'){  
             /* public function babou($nomRoute) 
             rend le paramètre $nomRoute obligatoire.
             ($nomRoute = 'Paramètre par défault')
@@ -29,3 +33,13 @@ class WelcomeController extends AbstractController /* Pour hériter de "toutes l
         ]);
     }
 }
+
+
+/* *****************
+Ne pas écrire les liens ne dur, les écrires ainsi:
+ *****************
+$url = $this->generateUrl('product_show', [
+    'slug' => 'Poupipo'
+    ]);
+ *****************
+Celà permet au site de gérer les liens générés selon les langues (par exemple) */
