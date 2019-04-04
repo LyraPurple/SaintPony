@@ -36,14 +36,21 @@ class ProduitsController extends AbstractController
     }
 
     /**
-     * @Route("/tabloduits/{page}")
+     * @Route("/tabloduits/{page}", requirements={"page":"\d+"})
      */
+    /* @Route("/tabloduits/{slug_symfony}") et 
+    @Route("/tabloduits/{page}") étaient identiques,
+    Pour différencier {slug_symfony} de {page},
+    on exige un nombre :requirements={"page":"\d+"}
+    Jusqu'à présent @Route("/tabloduits/{slug_symfony}")
+    primait sur @Route("/tabloduits/{page}") car il 
+    apparaissait avant dans le code. */
     /*  http://127.0.0.1:8001/tabloduits/1
         http://127.0.0.1:8001/tabloduits/2 */
     //  http://127.0.0.1:8000/tabloduits/1
     public function list($page = 1)
     {
-        $indice_depart = $page >= 1 ? /* Si notre page a ua moins un article */
+        $indice_depart = $page >= 1 ? /* Si notre page a au moins un article */
                         ($page - 1) * 2 
                         /* Notre page * le nombre d'articles qu'elle contient,
                         si elle contient 2 articles on change de page tout les 2 articles,
@@ -85,7 +92,12 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/tabloduits/{slug_symfony}")
      */
-    public function show($slug_symfony) /* J'ai tout pétay pour cette fonction */
+    // http://127.0.0.1:8000/tabloduits/slugi2
+    public function show($slug_symfony) 
+    /* Cette fonction ne se lançait pas car @Route("/tabloduits/{page}")
+    de la function list() faisait le travail, donc on ne passait pas
+    par cette route. En exigeant un nombre pour la route /tabloduits/{page},
+    on la différencie de /tabloduits/{slug_symfony} qui demande un nom d'article. */
     {
         foreach ($this->tablroduits as $produdu) {
             if ($produdu['slug_symfony'] === $slug_symfony) {
